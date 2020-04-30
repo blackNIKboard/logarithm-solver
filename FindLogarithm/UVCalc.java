@@ -31,12 +31,20 @@ public class UVCalc {
             throw new RuntimeException("Invalid index");
         int result = 0;
         double z = (double) (zList.get(i - 1));
+        FindLogarithm.print("Calculating u_" + i + ": ", false);
         if (z > l && z < ml) {
+            FindLogarithm.print("0 < z0 < 1/3p; ", false);
             result = UV.get(i - 1).getU() + 1;
+            FindLogarithm.print("u_" + i + " = " + "u_(" + i + "-1) = " + result, true);
         } else if (z > ml && z < mh) {
+            FindLogarithm.print("1/3p < z0 < 2/3p; ", false);
             result = UV.get(i - 1).getU() * 2;
+            FindLogarithm.print("u_" + i + " = " + "u_(" + i + "-1) * 2 = " + result, true);
         } else if (z > mh && z < h) {
+            FindLogarithm.print("2/3p < z0 < p; ", false);
             result = UV.get(i - 1).getU();
+            FindLogarithm.print("u_" + i + " = " + "u_(" + i + "-1) = " + result, true);
+
         } else {
             throw new RuntimeException("Error in u calculations");
         }
@@ -48,12 +56,19 @@ public class UVCalc {
             throw new RuntimeException("Invalid index");
         int result = 0;
         int z = (int) (zList.get(i - 1));
+        FindLogarithm.print("Calculating v_" + i + ": ", false);
         if (z > l && z < ml) {
+            // FindLogarithm.print("0 < z0 < 1/3p; ", true);
             result = UV.get(i - 1).getV();
+            FindLogarithm.print("v_" + i + " = " + "v_(" + i + "-1) = " + result, true);
         } else if (z > ml && z < mh) {
+            // FindLogarithm.print("1/3p < z0 < 2/3p; ", true);
             result = UV.get(i - 1).getV() * 2;
+            FindLogarithm.print("v_" + i + " = " + "v_(" + i + "-1) * 2 = " + result, true);
         } else if (z > module * 2 / 3 && z < module) {
+            // FindLogarithm.print("2/3p < z0 < p; ", true);
             result = UV.get(i - 1).getV() + 1;
+            FindLogarithm.print("v_" + i + " = " + "v_(" + i + "-1) + 1 = " + result, true);
         } else {
             throw new RuntimeException("Error in v calculations");
         }
@@ -76,12 +91,19 @@ public class UVCalc {
             throw new RuntimeException("Invalid index");
         int result = 0;
         int z = zList.get(i - 1);
+        FindLogarithm.print("Calculating z_" + i + ": ", false);
         if (z > l && z < ml) {
+            // FindLogarithm.print("0 < z0 < 1/3p; ", true);
             result = (z * a.intValue()) % module;
+            FindLogarithm.print("z_" + i + " = " + "z_(" + i + "-1) * a = " + result, true);
         } else if (z > ml && z < mh) {
+            // FindLogarithm.print("1/3p < z0 < 2/3p; ", true);
             result = ((int) Math.pow(z, 2)) % module;
+            FindLogarithm.print("z_" + i + " = " + "z_(" + i + "-1)^2 = " + result, true);
         } else if (z > mh && z < h) {
+            // FindLogarithm.print("2/3p < z0 < p; ", true);
             result = (z * b.intValue()) % module;
+            FindLogarithm.print("z_" + i + " = " + "z_(" + i + "-1) * b = " + result, true);
         } else {
             throw new RuntimeException("Error in z calculations");
         }
@@ -108,6 +130,7 @@ public class UVCalc {
     public int solve() {
         int xZero = 0;
         int i, up, down, j = -1;
+        FindLogarithm.print("z_0 = 1, u_0 = 0, v_0 = 0", true);
         for (i = 1; i <= module; i++) {
             if (i == module)
                 throw new RuntimeException("No solution: out of bounds");
@@ -120,7 +143,9 @@ public class UVCalc {
         xZero = (up / down) % (module - 1);
         while (xZero < 0)
             xZero += (module - 1);
-        FindLogarithm.print(xZero, true);
+        FindLogarithm.print("z_" + i + " = " + "z_" + j, true);
+        FindLogarithm.print("x = (" + UV.get(i).getU() + " - " + UV.get(j).getU() + ") / (" + UV.get(j).getV() + " - "
+                + UV.get(i).getV() + ") = " + xZero + " mod(" + (module - 1) + ")", true);
         return xZero;
     }
 }
