@@ -1,6 +1,8 @@
 # Logarithm Solver
 CLI app that solves discrete logarithms in several ways.
 ### Links for understanding
+https://ru.wikipedia.org/wiki/Ро-метод_Полларда_для_дискретного_логарифмирования
+
 https://en.wikipedia.org/wiki/Discrete_logarithm
 
 https://en.wikipedia.org/wiki/Pohlig–Hellman_algorithm
