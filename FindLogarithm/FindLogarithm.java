@@ -1,16 +1,22 @@
 package FindLogarithm;
 
+import java.math.BigInteger;
 import java.util.Scanner;
 
 public class FindLogarithm {
-    public static void printInteger(final int i, final boolean enter) {
+    public static void print(final int i, final boolean enter) {
         if (enter == true)
             System.out.println(i);
         else
             System.out.print(i);
     }
-
-    public static void printString(final String s, final boolean enter) {
+    public static void print(final long i, final boolean enter) {
+        if (enter == true)
+            System.out.println(i);
+        else
+            System.out.print(i);
+    }
+    public static void print(final String s, final boolean enter) {
         if (enter == true)
             System.out.println(s);
         else
@@ -25,18 +31,26 @@ public class FindLogarithm {
         checkData(srcData);
         int x = 1;
         int steps = 0;
+        BigInteger a;
+        BigInteger b = BigInteger.valueOf(0);
+        BigInteger[] data = new BigInteger[3];
+        for(int i = 0; i < 3; i++){
+            data[i] = BigInteger.valueOf(srcData[i]);
+        }
         while (true) {
-            if (x > 10000)
-                throw new RuntimeException("Out of bounds");
-            int a = srcData[0];
-            int b = -1;
+            if (x > srcData[2])
+                throw new RuntimeException("Not exist or error in calculations");
+            a = BigInteger.valueOf(srcData[0]);
             for (int k = 0; k < x; k++) {
-                a *= srcData[0];
-                b = a % srcData[2];
+                a = a.multiply(data[0]);         
+                b = (a.mod(data[2]));
                 steps++;
             }
+            // print(a.toString(), true);
+            // print(b.toString(), true);
+            // print("\n", true);
             x++;
-            if (b == srcData[1])
+            if (b.equals(data[1]))
                 break;
         }
         return ("Result: " + x + " with exponential complexity of " + steps);
@@ -48,23 +62,24 @@ public class FindLogarithm {
         String selectedWay = "NONE";
         final String[] ways = { "Brute Force" };
 
-        printString("Enter all integers from left to right: ", false);
+        print("Enter all integers from left to right: ", false);
         // ---input
         for (int i = 0; i < 3; i++) {
             source[i] = in.nextInt();
         }
-        printString("SELECT METHOD FROM LIST BELOW", true);
+        print("SELECT METHOD FROM LIST BELOW", true);
         for (int i = 0; i < ways.length; i++) {
-            printInteger(i + 1, false);
-            printString(" - " + ways[i], true);
+            print(i + 1, false);
+            print(" - " + ways[i], true);
         }
+        print("Method: ", false);
         selectedWay = ways[in.nextInt() - 1];
         in.close();
 
         // ---output
         // brute force method
         if (selectedWay == "Brute Force") {
-            printString(bruteForce(source), true);
+            print(bruteForce(source), true);
         } else
             throw new RuntimeException("Error in checking of method");
     }
