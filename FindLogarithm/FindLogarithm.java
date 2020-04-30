@@ -41,7 +41,7 @@ public class FindLogarithm {
         for (int i = 0; i < 3; i++) {
             data[i] = BigInteger.valueOf(srcData[i]);
         }
-        while (true) {
+        while (x < srcData[2] + 1) {
             if (x > srcData[2])
                 throw new RuntimeException("Not exist or error in calculations");
             a = BigInteger.valueOf(srcData[0]);
@@ -55,12 +55,11 @@ public class FindLogarithm {
             // print("\n", true);
             x++;
             if (b.equals(data[1]))
-                break;
+                print(("Result: " + x + " with complexity of " + steps), true);
         }
-        print(("Result: " + x + " with complexity of " + steps), true);
     }
 
-    public static List<MyPair> getIntersection(int[] arr1, int[] arr2) {
+    public static List<MyPair> getIntersection(long[] arr1, long[] arr2) {
         List<MyPair> list = new ArrayList<MyPair>();
         for (int i = 0; i < arr1.length; i++) {
             for (int j = 0; j < arr2.length; j++) {
@@ -78,8 +77,8 @@ public class FindLogarithm {
         int steps = 0;
         int H = (int) Math.sqrt(srcData[2]) + 1; // first step
         print("H = " + "sqrt(" + srcData[2] + ")" + " + " + "1" + " = " + H, true);
-        int[] cu = new int[H + 1];
-        int[] bav = new int[H + 1];
+        long[] cu = new long[H + 1];
+        long[] bav = new long[H + 1];
 
         int c = (int) Math.pow(srcData[0], H) % srcData[2]; // second step
         print("c = " + srcData[0] + " ^ " + H + " = " + c, true);
@@ -93,7 +92,7 @@ public class FindLogarithm {
         }
         print(" ", true);
         for (int v = 0; v <= H; v++) { // forth step
-            bav[v] = (srcData[1] * (int) Math.pow(srcData[0], v)) % srcData[2];
+            bav[v] = (srcData[1] * (long) Math.pow(srcData[0], v) % srcData[2]) % srcData[2];
             steps++;
             print("v" + "[" + v + "] = " + srcData[1] + " * " + srcData[0] + " ^ " + v + " mod(" + srcData[2] + ") = "
                     + bav[v], true);
