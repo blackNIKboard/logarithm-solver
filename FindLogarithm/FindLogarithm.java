@@ -13,6 +13,13 @@ public class FindLogarithm {
             System.out.print(i);
     }
 
+    public static void print(final Double i, final boolean enter) {
+        if (enter == true)
+            System.out.println(i);
+        else
+            System.out.print(i);
+    }
+
     public static void print(final long i, final boolean enter) {
         if (enter == true)
             System.out.println(i);
@@ -80,7 +87,7 @@ public class FindLogarithm {
         long[] cu = new long[H + 1];
         long[] bav = new long[H + 1];
 
-        int c = (int) Math.pow(srcData[0], H) % srcData[2]; // second step
+        int c = (int) (Math.pow(srcData[0], H) % srcData[2]); // second step
         print("c = " + srcData[0] + " ^ " + H + " = " + c, true);
         print(" ", true);
         cu[1] = c; // third step
@@ -113,7 +120,7 @@ public class FindLogarithm {
         final Scanner in = new Scanner(System.in);
         final int[] source = new int[3];
         String selectedWay = "NONE";
-        final String[] ways = { "Brute Force", "Comparison" };
+        final String[] ways = { "Brute Force", "Comparison", "ro-Pollard" };
 
         print("Enter all integers from left to right: ", false);
         // ---input
@@ -135,6 +142,9 @@ public class FindLogarithm {
             bruteForce(source);
         } else if (selectedWay == "Comparison") {
             comparison(source);
+        } else if (selectedWay == "ro-Pollard") {
+            UVCalc solution = new UVCalc(source);
+            solution.solve();
         } else
             throw new RuntimeException("Error in checking of method");
     }
