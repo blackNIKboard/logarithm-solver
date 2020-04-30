@@ -1,4 +1,4 @@
-package FindLogarithm;
+package app;
 
 import java.util.Scanner;
 
@@ -21,10 +21,9 @@ public class FindLogarithm {
         // throw new RuntimeException("Error in data");
     }
 
-    public static String bruteForce(final int[] srcData) {
+    public static int bruteForce(final int[] srcData) {
         checkData(srcData);
         int x = 1;
-        int steps = 0;
         while (true) {
             if (x > 10000)
                 throw new RuntimeException("Out of bounds");
@@ -33,13 +32,12 @@ public class FindLogarithm {
             for (int k = 0; k < x; k++) {
                 a *= srcData[0];
                 b = a % srcData[2];
-                steps++;
             }
             x++;
             if (b == srcData[1])
                 break;
         }
-        return ("Result: " + x + " with exponential complexity of " + steps);
+        return x;
     }
 
     public static void main(final String[] args) throws Exception {
@@ -62,9 +60,11 @@ public class FindLogarithm {
         in.close();
 
         // ---output
+
         // brute force method
         if (selectedWay == "Brute Force") {
-            printString(bruteForce(source), true);
+            printString("Selected brute force method, result = ", false);
+            printInteger(bruteForce(source), true);
         } else
             throw new RuntimeException("Error in checking of method");
     }
