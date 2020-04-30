@@ -1,4 +1,5 @@
 # Logarithm Solver
+CLI app that solves discrete logarithms in several ways.
 ### Links for understanding
 https://en.wikipedia.org/wiki/Discrete_logarithm
 
