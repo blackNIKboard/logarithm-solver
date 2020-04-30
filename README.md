@@ -1,1 +1,1 @@
-# logarithm-solver
+# Logarithm Solver
