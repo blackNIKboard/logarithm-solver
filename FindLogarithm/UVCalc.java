@@ -33,15 +33,15 @@ public class UVCalc {
         double z = (double) (zList.get(i - 1));
         FindLogarithm.print("Calculating u_" + i + ": ", false);
         if (z > l && z < ml) {
-            FindLogarithm.print("0 < z0 < 1/3p; ", false);
+            //FindLogarithm.print("0 < z0 < 1/3p; ", false);
             result = UV.get(i - 1).getU() + 1;
-            FindLogarithm.print("u_" + i + " = " + "u_(" + i + "-1) = " + result, true);
+            FindLogarithm.print("u_" + i + " = " + "u_(" + i + "-1) + 1 = " + result, true);
         } else if (z > ml && z < mh) {
-            FindLogarithm.print("1/3p < z0 < 2/3p; ", false);
+            //FindLogarithm.print("1/3p < z0 < 2/3p; ", false);
             result = UV.get(i - 1).getU() * 2;
             FindLogarithm.print("u_" + i + " = " + "u_(" + i + "-1) * 2 = " + result, true);
         } else if (z > mh && z < h) {
-            FindLogarithm.print("2/3p < z0 < p; ", false);
+            //FindLogarithm.print("2/3p < z0 < p; ", false);
             result = UV.get(i - 1).getU();
             FindLogarithm.print("u_" + i + " = " + "u_(" + i + "-1) = " + result, true);
 
@@ -107,6 +107,7 @@ public class UVCalc {
         } else {
             throw new RuntimeException("Error in z calculations");
         }
+        FindLogarithm.print("", true);
 
         return result;
     }
@@ -140,6 +141,11 @@ public class UVCalc {
         }
         up = UV.get(i).getU() - UV.get(j).getU();
         down = UV.get(j).getV() - UV.get(i).getV();
+        // FindLogarithm.print("TEST SCUKO " +
+        // a.pow(UV.get(i).getU()).mod(BigInteger.valueOf(module)) + " * "
+        // + b.pow(UV.get(i).getV()).mod(BigInteger.valueOf(module)) + " = "
+        // + a.pow(UV.get(j).getU()).mod(BigInteger.valueOf(module)) + " * "
+        // + b.pow(UV.get(j).getV()).mod(BigInteger.valueOf(module)), true);
         xZero = (up / down) % (module - 1);
         while (xZero < 0)
             xZero += (module - 1);
